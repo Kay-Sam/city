@@ -225,7 +225,7 @@ section {
 # Header
 --------------------------------------------------------------*/
 .topbar {
-  background: #00796b;
+  background: #291212;
   height: 40px;
   font-size: 14px;
   transition: all 0.5s;
@@ -415,7 +415,7 @@ section {
     font-size: 15px;
     text-transform: none;
     font-weight: 600;
-    color: #006a5d;
+    color: #291212;
   }
 
   .navbar .dropdown ul a i {
@@ -486,7 +486,7 @@ section {
     inset: 0;
     padding: 50px 0 10px 0;
     margin: 0;
-    background: rgba(0, 131, 116, 0.9);
+    background: #58300f;
     overflow-y: auto;
     transition: 0.3s;
     z-index: 9998;
@@ -532,7 +532,7 @@ section {
   .navbar .getstarted:hover,
   .navbar .getstarted:focus:hover {
     color: #fff;
-    background: rgba(0, 131, 116, 0.8);
+    background: #291212;
   }
 
   .navbar .dropdown ul,
@@ -542,8 +542,8 @@ section {
     padding: 10px 0;
     margin: 10px 20px;
     transition: all 0.5s ease-in-out;
-    background-color: #007466;
-    border: 1px solid #006459;
+    background-color: #291212;
+    border: 1px solid #291212;
   }
 
   .navbar .dropdown>.dropdown-active,
@@ -585,7 +585,7 @@ section {
     content: "";
     position: fixed;
     inset: 0;
-    background: rgba(0, 106, 93, 0.8);
+    background: #58300fa9;
     z-index: 9996;
   }
 }
@@ -605,30 +605,55 @@ section {
     background-attachment: fixed;
   }
 }
-.tagline{
-  color: #333;
-  padding: 2px 8px;
-  border-left: 3.5px solid var(--color-primary);
-  font-size: 14px;
-  font-weight: 500;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  display: inline-block;
-  margin-bottom: 25px;
-  animation: SlideInLeft 1s ease forwards;
+.tagline {
+  font-size: clamp(13px, 2.5vw, 15px);
+  color:#291212;
+  line-height: 1.6;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: left;
+  margin-bottom: 7px;
 }
+.tagline::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  background: #291212;
+  border-radius: 50%;
+  opacity: 0.7;
 
-@media (max-width: 768px) {
-  .tagline{
-    display: inline-flex;
-    align-items: center;
-  font-size: 14px;
-  font-weight: 500;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  display: inline-block;
-    padding: 2px 8px;
-    line-height: 1.4;
-    margin: 10px auto;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
   }
+  50% {
+    transform: scale(1.6);
+    opacity: 0.2;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+}
+@media (max-width: 480px) {
+  .tagline {
+    font-size: 13px;
+    gap: 6px;
+    justify-content: center;
+  }
+
+  .tagline::before {
+    width: 6px;
+    height: 6px;
+    animation: pulse 2.5s ease-in-out infinite;
+  }
+  .hero {
+  text-align: center;
+}
 }
 
 .hero h2 {
@@ -641,6 +666,7 @@ section {
 .hero p {
   color: rgba(41, 18, 18, 0.6);
   font-weight: 400;
+  font-size: 15px;
   margin-bottom: 30px;
 }
 /* =========================
@@ -713,15 +739,26 @@ section {
 
 @media (max-width: 640px) {
   .hero .btn {
-    font-size: 14px;
-    padding: 12px 30px;
+    font-size: 12px;
+    padding: 4px 20px;
   }
 
   .hero .btn-secondary {
     margin-left: 10px;
   }
+  
+.hero h2 {
+  font-size: 32px;
 }
 
+.section-title h2{
+    font-size:2rem;
+    margin:15px 0;
+    font-weight:800;
+}
+
+}
+/* about */
 .about-section{
     padding:100px 0;
     background:#f8fafc;
@@ -742,7 +779,7 @@ section {
 }
 
 .section-title h2{
-    font-size:3rem;
+    font-size:2rem;
     margin:15px 0;
     font-weight:800;
 }
@@ -805,12 +842,12 @@ section {
 
 /* Mission */
 .mission-box {
-  background: linear-gradient(135deg, #58300f, #a86b2d);
+  background:linear-gradient(135deg, #2f1a08, #6b3d12);
 }
 
 /* Vision */
 .vision-box {
-  background: linear-gradient(135deg, #2f1a08, #6b3d12);
+  background:#333;
 }
 
 /* Hover effect */
@@ -860,12 +897,16 @@ section {
 }
 
 .founder-tag{
-    display:inline-block;
-    color:var(--color-primary);
-    font-weight:700;
-    margin-bottom:15px;
-    text-transform:uppercase;
-    letter-spacing:1px;
+  display: inline-block;
+  background: color-mix(in srgb, var(--color-primary), transparent 85%);
+  color: #333;
+  padding: 0.2rem 1rem;
+  border-radius: 50px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
 }
 
 .founder-content h2{
@@ -875,16 +916,21 @@ section {
 }
 
 .founder-content h4{
-    color:#64748b;
+    color:#47250e;
     margin-bottom:25px;
 }
 
 .founder-content p{
     color:#555;
-    line-height:1.9;
+    line-height:1.4;
     margin-bottom:20px;
 }
-
+.about-tag {
+  margin-top: -15px;
+  font-size: 1rem;
+  font-style: italic;
+      color:#47250e;
+}
 .founder-stats{
     display:flex;
     gap:50px;
