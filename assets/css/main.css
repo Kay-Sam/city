@@ -639,7 +639,7 @@ section {
     opacity: 0.7;
   }
 }
-@media (max-width: 480px) {
+@media (max-width: 680px) {
   .tagline {
     font-size: 13px;
     gap: 6px;
@@ -2614,6 +2614,13 @@ section {
   margin: 0;
 }
 
+
+
+.whatsapp-float.is-visible {
+  opacity: 1;
+  visibility: visible;
+}
+
 .whatsapp-float {
   position: fixed;
   right: 18px;
@@ -2627,6 +2634,8 @@ section {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  opacity: 0;
+    visibility: hidden;
   box-shadow: 0 12px 30px rgba(41, 18, 18, 0.28);
   animation: whatsappPulse 1.8s infinite;
 }
