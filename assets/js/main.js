@@ -9,16 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
   "use strict";
 
   /**
-   * Preloader
-   */
-  const preloader = document.querySelector('#preloader');
-  if (preloader) {
-    window.addEventListener('load', () => {
-      preloader.remove();
-    });
-  }
-
-  /**
    * Sticky Header on Scroll
    */
   const selectHeader = document.querySelector('#header');
@@ -137,10 +127,52 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     window.addEventListener('load', togglescrollTop);
     document.addEventListener('scroll', togglescrollTop);
-    scrollTop.addEventListener('click', window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    }));
+    scrollTop.addEventListener('click', (event) => {
+      event.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  }
+
+  /**
+   * Send contact and booking forms to WhatsApp
+   */
+  document.querySelectorAll('.php-email-form').forEach(form => {
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+
+      const formData = new FormData(form);
+      const title = form.dataset.whatsappTitle || document.title || 'City Of Ideas Enquiry';
+      const lines = [`${title}`];
+
+      formData.forEach((value, key) => {
+        const cleanValue = String(value).trim();
+        if (!cleanValue) return;
+        const cleanKey = key.replace(/_/g, ' ').replace(/\b\w/g, char => char.toUpperCase());
+        lines.push(`${cleanKey}: ${cleanValue}`);
+      });
+
+      const message = encodeURIComponent(lines.join('\n'));
+      window.open(`https://wa.me/2348083410417?text=${message}`, '_blank', 'noopener');
+    }, true);
+  });
+
+  /**
+   * Show homepage WhatsApp pulse only after the hero section
+   */
+  const whatsappFloat = document.querySelector('.whatsapp-float[data-show-after-hero="true"]');
+  const hero = document.querySelector('#hero');
+  if (whatsappFloat && hero) {
+    const toggleWhatsappFloat = () => {
+      const heroBottom = hero.offsetTop + hero.offsetHeight;
+      whatsappFloat.classList.toggle('is-visible', window.scrollY > heroBottom - 120);
+    };
+    window.addEventListener('load', toggleWhatsappFloat);
+    document.addEventListener('scroll', toggleWhatsappFloat);
+    toggleWhatsappFloat();
   }
 
   /**
@@ -280,7 +312,7 @@ document.addEventListener('DOMContentLoaded', () => {
    */
   function aos_init() {
     AOS.init({
-      duration: 1000,
+      duration: 700,
       easing: 'ease-in-out',
       once: true,
       mirror: false
