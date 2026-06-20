@@ -9,7 +9,7 @@
 :root {
   --color-default: #222222;
   --color-primary: #58300f;
-  --color-secondary: #a86b2d;
+  --color-secondary:#a86b2d;
 }
 /* Smooth scroll behavior */
 :root {
@@ -609,6 +609,7 @@ section {
   font-size: clamp(13px, 2.5vw, 15px);
   color:#291212;
   line-height: 1.6;
+  font-weight: 500;
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -639,7 +640,7 @@ section {
     opacity: 0.7;
   }
 }
-@media (max-width: 680px) {
+@media (max-width: 768px) {
   .tagline {
     font-size: 13px;
     gap: 6px;
@@ -2457,7 +2458,7 @@ section {
 }
 
 .community-band {
-  background: linear-gradient(135deg, #2f1a08, #6b3d12);
+  background:#333;
   color: #fff;
 }
 
@@ -2470,6 +2471,18 @@ section {
   color: rgba(255, 255, 255, 0.82);
   font-size: 18px;
 }
+.community-tag{
+  display: inline-block;
+  background: #f4f4ff8e;
+  color: #333;
+  padding: 0.2rem 1rem;
+  border-radius: 50px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+}
 
 .ministry-preview h2,
 .page-title h1 {
@@ -2479,7 +2492,7 @@ section {
 
 .page-title {
   padding: 110px 0 70px;
-  background: linear-gradient(135deg, #fff8f0, #fff);
+  background: linear-gradient(135deg, #fff8f0, #f5f0df);
 }
 
 .page-title h1 {
@@ -2624,11 +2637,11 @@ section {
 .whatsapp-float {
   position: fixed;
   right: 18px;
-  bottom: 82px;
+  bottom: 68px;
   width: 58px;
   height: 58px;
   border-radius: 50%;
-  background: var(--color-primary);
+  background: #188630;
   color: #fff;
   z-index: 99998;
   display: inline-flex;
@@ -2636,7 +2649,6 @@ section {
   justify-content: center;
   opacity: 0;
     visibility: hidden;
-  box-shadow: 0 12px 30px rgba(41, 18, 18, 0.28);
   animation: whatsappPulse 1.8s infinite;
 }
 
@@ -2652,20 +2664,25 @@ section {
 
 @keyframes whatsappPulse {
   0% {
-    box-shadow: 0 0 0 0 rgba(88, 48, 15, 0.45), 0 12px 30px rgba(41, 18, 18, 0.28);
+    box-shadow: 0 0 0 0 rgba(15, 88, 27, 0.45), 0 12px 30px rgba(18, 41, 18, 0.28);
   }
   70% {
-    box-shadow: 0 0 0 18px rgba(88, 48, 15, 0), 0 12px 30px rgba(41, 18, 18, 0.28);
+    box-shadow: 0 0 0 18px rgba(15, 88, 36, 0), 0 12px 30px rgba(18, 41, 33, 0.28);
   }
   100% {
-    box-shadow: 0 0 0 0 rgba(88, 48, 15, 0), 0 12px 30px rgba(41, 18, 18, 0.28);
+    box-shadow: 0 0 0 0 rgba(15, 88, 27, 0), 0 12px 30px rgba(18, 41, 25, 0.28);
   }
 }
 
 .footer {
   padding-bottom: 28px;
 }
-
+.footer a {
+  color: #fff;
+}
+.footer a:hover {
+  color: #ffd88a;
+}
 @media (max-width: 1279px) {
   .nav-cta {
     background: transparent;
