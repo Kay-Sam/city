@@ -105,9 +105,80 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /**
+   * Render shared content from assets/js/site-data.js
+   */
+  const siteData = window.cityOfIdeasData || {};
+
+  const escapeHtml = value => String(value || '').replace(/[&<>"']/g, char => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;'
+  })[char]);
+
+  document.querySelectorAll('[data-events-list]').forEach(container => {
+    const listName = container.dataset.eventsList;
+    const limit = Number(container.dataset.limit) || undefined;
+    const events = (siteData[listName] || []).slice(0, limit);
+
+    container.innerHTML = events.map(item => `
+      <div class="col-xl-4 col-md-6 portfolio-item">
+        <div class="portfolio-wrap">
+          <a href="${escapeHtml(item.image)}" data-gallery="city-gallery" class="glightbox">
+            <img src="${escapeHtml(item.image)}" class="img-fluid" alt="${escapeHtml(item.alt || item.title)}" />
+          </a>
+          <div class="portfolio-info">
+            <h4>${escapeHtml(item.title)}</h4>
+            <p>${escapeHtml(item.description)}</p>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  });
+
+  document.querySelectorAll('[data-pricing-list]').forEach(container => {
+    const packages = siteData.pricing || [];
+
+    container.innerHTML = packages.map(item => `
+      <div class="col-xl-3 col-md-6">
+        <article class="pricing-card ${item.popular ? 'is-popular' : ''} h-100">
+          <div class="pricing-topline">
+            <span class="pricing-tier">${escapeHtml(item.tier)}</span>
+            <span class="pricing-badge">${escapeHtml(item.badge)}</span>
+          </div>
+          <h3>${escapeHtml(item.title)}</h3>
+          <p class="pricing-price">${escapeHtml(item.investment)}</p>
+          <p class="pricing-audience">${escapeHtml(item.audience)}</p>
+          <p><strong>Outcome:</strong> ${escapeHtml(item.outcome)}</p>
+          <div class="pricing-includes">
+            <strong>You get:</strong>
+            <ul>
+              ${(item.includes || []).map(point => `<li>${escapeHtml(point)}</li>`).join('')}
+            </ul>
+          </div>
+          ${item.topics ? `<p><strong>Topics:</strong> ${escapeHtml(item.topics)}</p>` : ''}
+          <a class="btn btn-contact" href="https://wa.me/2348083410417?text=${encodeURIComponent(item.message || item.cta)}" target="_blank" rel="noopener">${escapeHtml(item.cta)}</a>
+        </article>
+      </div>
+    `).join('');
+  });
+
+  document.querySelectorAll('[data-trusted-by]').forEach(container => {
+    const trustedBy = siteData.trustedBy || [];
+    const logos = [...trustedBy, ...trustedBy];
+
+    container.innerHTML = logos.map(item => `
+      <div class="trusted-logo" aria-label="${escapeHtml(item.name)}">
+        ${item.image ? `<img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.name)} logo" />` : `<span class="trusted-wordmark">City <em>of</em> Ideas</span>`}
+      </div>
+    `).join('');
+  });
+
+  /**
    * Initiate glightbox
    */
-  const glightbox = GLightbox({
+  GLightbox({
     selector: '.glightbox'
   });
 
